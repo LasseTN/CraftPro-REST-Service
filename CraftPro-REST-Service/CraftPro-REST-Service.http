@@ -1,0 +1,6 @@
+@CraftPro_REST_Service_HostAddress = http://localhost:5090
+
+GET {{CraftPro_REST_Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
