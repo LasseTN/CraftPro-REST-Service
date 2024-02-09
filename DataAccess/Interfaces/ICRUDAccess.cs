@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Interfaces {
-    internal interface ICRUDAccess<T> {
+    public interface ICRUDAccess<T> {
 
         Task<int> Create(T entity);
         Task<T> Get(int id);
