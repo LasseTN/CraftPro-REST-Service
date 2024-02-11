@@ -1,4 +1,9 @@
 
+using BusinessLogic;
+using BusinessLogic.Interfaces;
+using DataAccess;
+using DataAccess.Interfaces;
+using Model;
 using Serilog;
 
 namespace CraftPro_REST_Service {
@@ -7,6 +12,23 @@ namespace CraftPro_REST_Service {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            // Case
+            builder.Services.AddTransient<ICRUD<Case>, CaseControl>();
+            builder.Services.AddTransient<ICRUDAccess<Case>, CaseAccess>();
+
+            // Customer
+            builder.Services.AddTransient<ICRUD<Customer>, CustomerControl>();
+            builder.Services.AddTransient<ICRUDAccess<Customer>, CustomerAccess>();
+
+            // Employee
+            builder.Services.AddTransient<ICRUD<Employee>, EmployeeControl>();
+            builder.Services.AddTransient<ICRUDAccess<Employee>, EmployeeAccess>();
+
+            // WorkAddress
+            builder.Services.AddTransient<ICRUD<WorkAddress>, WorkAddressControl>();
+            builder.Services.AddTransient<ICRUDAccess<WorkAddress>, WorkAddressAccess>();
+
 
             builder.Services.AddControllers();
 
