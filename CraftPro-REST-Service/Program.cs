@@ -29,6 +29,10 @@ namespace CraftPro_REST_Service {
             builder.Services.AddTransient<ICRUD<WorkAddress>, WorkAddressControl>();
             builder.Services.AddTransient<ICRUDAccess<WorkAddress>, WorkAddressAccess>();
 
+            // CaseWorker
+            builder.Services.AddTransient<ICRUD<CaseWorker>, CaseWorkerControl>();
+            builder.Services.AddTransient<ICRUDAccess<CaseWorker>, CaseWorkerAccess>();
+
 
             builder.Services.AddControllers();
 
