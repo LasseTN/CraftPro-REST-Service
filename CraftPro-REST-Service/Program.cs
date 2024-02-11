@@ -44,7 +44,7 @@ namespace CraftPro_REST_Service {
             var provider = builder.Services.BuildServiceProvider();
             var configuration = provider.GetRequiredService<IConfiguration>();
 
-            // Configure CORS
+            // CORS
             builder.Services.AddCors(options => {
                 var frontendURL = configuration.GetValue<string>("frontend_url");
 
