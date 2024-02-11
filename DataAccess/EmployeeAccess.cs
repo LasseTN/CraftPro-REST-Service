@@ -1,4 +1,5 @@
 ﻿using DataAccess.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Model;
 using System;
@@ -10,10 +11,17 @@ using System.Threading.Tasks;
 namespace DataAccess {
     public class EmployeeAccess : ICRUDAccess<Employee> {
 
+        private readonly string? _connectionString;
         private readonly ILogger<ICRUDAccess<Employee>> logger;
 
-        public EmployeeAccess(ILogger<ICRUDAccess<Employee>> logger = null) {
+        public EmployeeAccess(IConfiguration configuration, ILogger<ICRUDAccess<Employee>> logger = null) {
+            _connectionString = configuration.GetConnectionString("DatabaseConnection");
             this.logger = logger;
+        }
+
+        // Test
+        public EmployeeAccess(string  connectionString) {
+            _connectionString = connectionString;
         }
 
         public Task<int> Create(Employee entity) {
