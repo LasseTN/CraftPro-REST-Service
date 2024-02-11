@@ -37,7 +37,7 @@ namespace CraftPro_REST_Service {
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Configure Serilog for logging
+            // Serilog
             builder.Host.UseSerilog((context, configuration) =>
                 configuration.ReadFrom.Configuration(context.Configuration));
 
