@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using DataAccess.Interfaces;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic {
     public class CaseControl : ICRUD<Case> {
-        private readonly ICRUD<Case> _caseAccess;
+        private readonly ICRUDAccess<Case> _caseAccess;
 
-        public CaseControl(ICRUD<Case> caseAccess) {
+        public CaseControl(ICRUDAccess<Case> caseAccess) {
             _caseAccess = caseAccess;
         }
 

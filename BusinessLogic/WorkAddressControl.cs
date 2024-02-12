@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using DataAccess.Interfaces;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 namespace BusinessLogic {
     public class WorkAddressControl : ICRUD<WorkAddress> {
 
-        private readonly ICRUD<WorkAddress> _workAddress;
+        private readonly ICRUDAccess<WorkAddress> _workAddress;
 
-        public WorkAddressControl(ICRUD<WorkAddress> workAddress) {
+        public WorkAddressControl(ICRUDAccess<WorkAddress> workAddress) {
             _workAddress = workAddress;
         }
 

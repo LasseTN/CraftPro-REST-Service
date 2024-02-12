@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic {
     public class CaseWorkerControl : ICRUD<CaseWorker> {
-        private readonly ICRUD<CaseWorker> _caseWorker;
+        private readonly ICRUDAccess<CaseWorker> _caseWorkerAccess;
 
-        public CaseWorkerControl(ICRUD<CaseWorker> caseWorker) {
-            _caseWorker = caseWorker;
+        public CaseWorkerControl(ICRUDAccess<CaseWorker> caseWorkerAccess) {
+            _caseWorkerAccess = caseWorkerAccess;
         } 
         public Task<int> Create(CaseWorker entity) {
             throw new NotImplementedException();

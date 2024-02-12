@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using DataAccess.Interfaces;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic {
     public class CustomerControl : ICRUD<Customer> {
-        private readonly ICRUD<Customer> _customerAccess;
+        private readonly ICRUDAccess<Customer> _customerAccess;
 
-    public CustomerControl(ICRUD<Customer> customerAccess) { 
+    public CustomerControl(ICRUDAccess<Customer> customerAccess) { 
         _customerAccess = customerAccess;
         }
 

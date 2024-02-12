@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using DataAccess.Interfaces;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic {
     public class EmployeeControl : ICRUD<Employee> {
-        private readonly ICRUD<Employee> _employee;
+        private readonly ICRUDAccess<Employee> _employeeAccess;
 
-        public EmployeeControl(ICRUD<Employee> employee) {
-            _employee = employee;
+        public EmployeeControl(ICRUDAccess<Employee> employeeAccess) {
+            _employeeAccess = employeeAccess;
         }
 
         public Task<int> Create(Employee entity) {
