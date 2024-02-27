@@ -15,5 +15,22 @@ namespace CraftPro_REST_Service.Controllers {
             _employeeControl = employeeControl;
             _logger = logger;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateEmployee([FromBody] Employee employee) {
+            IActionResult foundResult;
+            int insertedId = await _employeeControl.Create(employee);
+            if (insertedId == -1) {
+                foundResult = StatusCode(500);
+            } else {
+                employee.EmployeeId = insertedId;
+                foundResult = CreatedAtAction(nameof(Get), new {id = insertedId}, employee);
+            }
+            return foundResult;
+        }
+
+        private object Get() {
+            throw new NotImplementedException();
+        }
     }
 }

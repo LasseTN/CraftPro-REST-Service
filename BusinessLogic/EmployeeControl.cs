@@ -15,8 +15,10 @@ namespace BusinessLogic {
             _employeeAccess = employeeAccess;
         }
 
-        public Task<int> Create(Employee entity) {
-            throw new NotImplementedException();
+        public async Task<int> Create(Employee entity) {
+            int insertedId = -1;
+            insertedId = await _employeeAccess.Create(entity);
+            return insertedId;
         }
 
         public Task<bool> Delete(int id) {
