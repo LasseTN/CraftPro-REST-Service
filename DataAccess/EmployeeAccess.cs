@@ -1,9 +1,11 @@
-﻿using DataAccess.Interfaces;
+﻿using Dapper;
+using DataAccess.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +14,11 @@ namespace DataAccess {
     public class EmployeeAccess : ICRUDAccess<Employee> {
 
         private readonly string? _connectionString;
-        private readonly ILogger<ICRUDAccess<Employee>> logger;
+        private readonly ILogger<ICRUDAccess<Employee>> _logger;
 
         public EmployeeAccess(IConfiguration configuration, ILogger<ICRUDAccess<Employee>> logger = null) {
             _connectionString = configuration.GetConnectionString("DatabaseConnection");
-            this.logger = logger;
+            this._logger = logger;
         }
 
         // Test
@@ -24,8 +26,30 @@ namespace DataAccess {
             _connectionString = connectionString;
         }
 
-        public Task<int> Create(Employee entity) {
-            throw new NotImplementedException();
+        public async Task<int> Create(Employee entity) {
+            int insertedEmployeeId = -1;
+            using (SqlConnection conn = new SqlConnection(_connectionString)) {
+                conn.Open();
+                var sql = @"INSERT INT Employees
+                            (Name,
+                            phone,
+                            email,
+                            role)
+                            OUTPUT INSERTED.employeeId
+                            VALUES
+                            (@name,
+                            @phone,
+                            @email,
+                            @role)";
+                try {
+                    insertedEmployeeId = await conn.ExecuteScalarAsync<int>(sql, entity);
+                } catch (Exception ex) {
+                    insertedEmployeeId = -1;
+                    _logger?.LogError(ex.Message);
+                    throw;
+                }
+                return insertedEmployeeId;
+            }
         }
 
         public Task<bool> Delete(int id) {
